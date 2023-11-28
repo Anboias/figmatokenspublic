@@ -1,24 +1,33 @@
-name: Build Style Dictionary
+name: Build and Commit
 
 on:
   push:
     branches: [main]
 
 jobs:
-  build:
+  build-and-commit:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
+
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14" # Specify the Node.js version you need
+          node-version: "14" # Replace with your desired Node.js version
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run Style Dictionary build
-        run: npx style-dictionary build
+      - name: Run build
+        run: npm run build
 
-    # Optional: Add steps to deploy or post-process the build if necessary
+      - name: Commit and push if changes
+        run: |
+          git config --global user.email "actions@users.noreply.github.com"
+          git config --global user.name "GitHub Actions"
+          git add -A
+          git commit -m "Generated build output" -a || exit 0 # This line prevents the action from failing if there's nothing to commit
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
