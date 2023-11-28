@@ -1,8 +1,9 @@
 {
   "source": ["tokens/**/*.json"],
   "platforms": {
-    "css": {
+    "scss": {
       "transformGroup": "css",
+      "prefix": "sd",
       "buildPath": "build/css/",
       "files": [
         {
