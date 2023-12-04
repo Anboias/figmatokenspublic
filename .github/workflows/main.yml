@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Notify Slack about the update
         uses: 8398a7/action-slack@v3
         with:
@@ -16,10 +19,22 @@ jobs:
           fields: workflow,job,commit,repo,ref,author,took
           custom_payload: |
             {
-              attachments: [{
-                color: 'success',
-                text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
-              }]
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Figma Design Tokens Update"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Design updated! Commit message: *${{ github.event.head_commit.message }}*"
+                  }
+                }
+              ]
             }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
