@@ -23,9 +23,16 @@ jobs:
                   "type": "header",
                   "text": {
                     "type": "plain_text",
-                    "text": "🆕 ${{ github.event.head_commit.message }}"
+                    "text": "✅ Design Tokens updated!"
                   }
                 },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*${{ github.event.head_commit.message }}*"
+                  }
+                }
               ]
             }
         env:
