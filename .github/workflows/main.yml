@@ -23,14 +23,14 @@ jobs:
                   "type": "header",
                   "text": {
                     "type": "plain_text",
-                    "text": "Figma Design Tokens Update"
+                    "text": "✅ Design tokens updated!"
                   }
                 },
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "✅ Design updated!\n💬 *${{ github.event.head_commit.message }}*"
+                    "text": "💬 *${{ github.event.head_commit.message }}*"
                   }
                 }
               ]
