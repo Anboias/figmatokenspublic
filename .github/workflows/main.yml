@@ -15,22 +15,31 @@ jobs:
           status: status
           custom_payload: |
             {
-              "blocks": [
-                {
-                  "type": "header",
-                  "text": {
-                    "type": "plain_text",
-                    "text": "Figma Design Tokens Update"
-                  }
+              text: "Custom Field Check",
+              attachments: [{
+                "author_name": "8398a7@action-slack", // json
+                fallback: 'fallback',
+                color: 'good',
+                title: 'CI Result',
+                text: 'Succeeded',
+                fields: [{
+                  title: 'lower case',
+                  value: 'LOWER CASE CHECK'.toLowerCase(),
+                  short: true
                 },
                 {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "Design updated! Commit message: *${{ github.event.head_commit.message }}*"
-                  }
-                }
-              ]
+                  title: 'reverse',
+                  value: 'gnirts esrever'.split('').reverse().join(''),
+                  short: true
+                },
+                {
+                  title: 'long title1',
+                  value: 'long value1',
+                  short: false
+                }],
+                actions: [{
+                }]
+              }]
             }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
