@@ -15,8 +15,7 @@ jobs:
       - name: Notify Slack about the update
         uses: 8398a7/action-slack@v3
         with:
-          status: success
-          fields: workflow,job,commit,repo,ref,author,took
+          status: custom
           custom_payload: |
             {
               "blocks": [
